@@ -1,15 +1,17 @@
 "use client";
 import React, { useState } from "react";
+import Link from "next/link";
 
-import { ChevronLeft, Handbag, Link, MenuIcon, SearchIcon, UserIcon } from "lucide-react";
+import { ChevronLeft, Handbag,  MenuIcon, SearchIcon, UserIcon } from "lucide-react";
 // import DesktopNav from "./DesktopNav";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <nav>
-    <div className="flex gap-2 justify-between items-center px-10 border-b h-20">
-      <div className="flex items-center gap-2 h-20">
+    <div className="flex w-[90vw] mx-auto gap-2 justify-between items-center   h-20">
+        
+      <div className="flex items-center gap-2 h-20 cursor-pointer" onClick={()=> window.location.href = "/"}>
         <svg fill="none" height="60" viewBox="0 0 32 32" width="60">
           <path
             clipRule="evenodd"
@@ -22,11 +24,11 @@ const Navbar = () => {
       </div>
       <div className="hidden md:flex">
         <ul className="flex items-center font-semibold lg:gap-10 md:gap-5 list-none text-nowrap">
-          <li>Home</li>
-          <li>Collection</li>
-          <li>About</li>
-          <li>Contact</li>
-          <li className=" ">Admin Panel</li>
+        <Link href="/home">  <li>Home</li></Link>
+        <Link href="/collection">  <li>Collection</li></Link>
+        <Link href="/about">  <li>About</li></Link>
+        <Link href="/contact">  <li>Contact</li></Link>
+        <Link href="/admin">  <li className=" ">Admin Panel</li></Link>
         </ul>
       </div>
       <div className="flex items-center gap-5">
