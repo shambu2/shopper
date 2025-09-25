@@ -1,22 +1,23 @@
 import { NextResponse,NextRequest } from "next/server";
 import { bucket } from "@/lib/gcp";
-// import { prisma } from "@/lib/prismaClient";
-// import { Prisma } from "@prisma/client";
-import {prisma} from "@/lib/prismaClient"
-// import { PrismaClient  } from "@prisma/client";
-// import { error } from "console";
+// import {prisma} from "@/lib/prismaClient"
+// import { PrismaClient } from "@prisma/client";
 
 // const prisma = new PrismaClient();
+
+import { PrismaClient } from "@/lib/generated/prisma";
+const prisma = new PrismaClient();
+
 
 export async function POST(req:NextRequest){
     try {
         const formData = await req.formData();
         const file =  formData.get("image") as File | null;
         const name =  formData.get("name") as string;
-        const reviews =  formData.get("reviews") as number | null;
+        const reviews =  formData.get("reviews") as string ;
         const price =  parseFloat(formData.get("price") as string) 
         const intro = formData.get("intro") as string;
-        const sizes = formData.get("sizes") as string;
+        const sizes = formData.get("sizes") as string ;
         const description = formData.get("description") as string;
         const gender = formData.get("gender") as string;
         if(!file){
@@ -39,7 +40,7 @@ export async function POST(req:NextRequest){
         const product = await prisma.product.create({
             data:{
                 name,
-                reviews,
+                review: reviews ,
                 price,
                 intro,
                 sizes,
