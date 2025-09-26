@@ -11,7 +11,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <div className="h-screen pt-0.5 mx-auto">
+    <div className="h-screen pt-4 mx-auto ">
       <div className="grid grid-cols-3 justify-center items-center gap-10 mt-10">
         <div className="grid justify-center items-center text-xl ">
           <RotateCcw size={50} className="mb-8 ml-22" />
@@ -39,7 +39,7 @@ const Footer = () => {
           </p>
         </div>
       </div>
-      <div className="my-20  text-center space-y-8">
+      <div className="mt-30 mb-20 text-center space-y-8">
         <h1 className="text-6xl font-bold">Subscribe now & get 20% off</h1>
         <p className="text-2xl font-semibold">
           Get notified when we launch new products or services
@@ -56,7 +56,7 @@ const Footer = () => {
           </Button>
         </div>
       </div>
-      <div className="grid grid-cols-3 items-center justify-center">
+      <div className="grid grid-cols-2 border-b-[1px] border-gray-600 pb-10 items-center justify-between">
         <div className="grid justify-center items-center">
           <svg fill="none" height="60" viewBox="0 0 32 32" width="60">
             <path
@@ -66,30 +66,39 @@ const Footer = () => {
               fillRule="evenodd"
             />
           </svg>
-          <p>
+          <p className="w-2/3">
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry. Lorem Ipsum has been the industry's standard dummy text
             ever since the 1500s, when an unknown printer took a galley of type
             and scrambled it to make a type specimen boo
           </p>
         </div>
-        <div className="flex flex-col justify-center items-center">
-          <h1 className="text-xl font-black mb-10">COMPANY</h1>
-          <ul>
-            <li>Home</li>
-            <li>About us</li>
-            <li>Delivery</li>
-            <li>Privacy policy</li>
-          </ul>
+        <div className="flex justify-evenly">
+          <div className="flex flex-col justify-center items-center gap-4">
+            <h1 className="text-xl font-black md:pt-14">COMPANY</h1>
+            <ul className="text-[18px] space-y-2">
+              <li>Home</li>
+              <li>About us</li>
+              <li>Delivery</li>
+              <li>Privacy policy</li>
+            </ul>
+          </div>
+          <div className="flex flex-col justify-center  gap-4">
+            <h1 className="text-xl font-black md:pt-14">GET IN TOUCH</h1>
+            <div className="text-[18px] space-y-2">
+              <p>+91-9876543210</p>
+              <p>info.forever601@example.com</p>
+              <p>Instagram</p>
+              <p>Facebook</p>
+              
+            </div>
+          </div>
         </div>
-        <div className="grid justify-center items-center">
-          <h1>GET IN TOUCH</h1>
-          <p>+91-9876543210</p>
-          <p>info.forever601@example.com</p>
-          <Link href={"/"}>Instagram</Link>
-        </div>
+        
       </div>
-      {/* <div>© 2023 Forever 21</div> */}
+      <div className="flex justify-center items-center pt-12">
+        Copyright 2024@ This website and brand - All Right Reserved.
+      </div>
     </div>
   );
 };
