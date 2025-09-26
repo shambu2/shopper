@@ -40,12 +40,13 @@ model Order {
 // }
 
 model Product {
-  id Int @id @default(autoincrement())
+  id String @id @default(uuid())
   name String
   review String @default("0")
   price Float
   intro String
   sizes String
+  type String @default("all")
   description String
   image String
   gender String 
