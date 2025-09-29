@@ -1,8 +1,10 @@
 import React from 'react'
 
-const page = () => {
+const page = ({children}:{children:React.ReactNode}) => {
   return (
-    <div>page</div>
+    <div>
+      {children}
+    </div>
   )
 }
 
