@@ -8,13 +8,22 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { SelectContent } from "@radix-ui/react-select";
-import { CloudUpload, Upload } from "lucide-react";
-import React from "react";
+import { SelectContent, Value } from "@radix-ui/react-select";
+import { form } from "framer-motion/client";
+import React, { useState } from "react";
+import axios from "axios";
 
 const sizes_list = ["S", "M", "L", "XL"];
 
 const page = () => {
+  const [image, setImage] = useState<File | null>(null);
+  const [name, setName] = useState<string>("");
+  const [intro, setIntro] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [gender, setGender] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
+  const [type, setType] = useState<string>("");
+  const [price, setPrice] = useState<string>("");
   const [sizes, setSizes] = React.useState<string[]>([]);
 
   const toggleSize = (size: string) => {
@@ -22,44 +31,73 @@ const page = () => {
       prev.includes(size) ? prev.filter((s) => s !== size) : [...prev, size]
     );
   };
+
+  const hadleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    const formData = new FormData();
+
+    if (image) formData.append("image", image);
+    formData.append("name", name);
+    formData.append("intro", intro);
+    formData.append("description", description);
+    formData.append("gender", gender);
+    formData.append("category", category);
+    formData.append("type", type);
+    formData.append("price", price);
+    sizes.forEach((s)=> formData.append("sizes[]",s))
+
+    const res =  axios.post("http://localhost:3000/api/admin", formData)
+    console.log( res)
+  };
+
   return (
-    <form>
+    <form onSubmit={hadleSubmit}>
       <div className="flex flex-col gap-3">
         <label htmlFor="" className="text-xl font-semibold  ">
           Upload image
         </label>
         <div className="flex flex-col items-center justify-center gap-4 p-6 border-2 border-dashed rounded-xl border-gray-400 w-80">
-          <label
-            htmlFor="file-upload"
-            className="flex flex-col items-center gap-2 cursor-pointer"
-          >
-            <Upload className="w-10 h-10 text-gray-600" />
-            <span className="text-gray-700 font-medium">Click to upload</span>
-          </label>
-          <input
+          <Input
             id="image"
             name="image"
             type="file"
-            className="hidden"
-            // onChange={(e) => console.log(e.target.files)}
+            className="border  z-10 "
+            accept="image/*"
+            multiple={false}
+            onChange={(e) => setImage(e.target.files?.[0] || null)}
           />
         </div>
       </div>
       <div className="flex flex-col gap-2 mt-4 text-xl font-semibold">
         <label htmlFor="">Product name</label>
-        {/* <input type="text" name="name" placeholder="Product name" /> */}
-        <Input name="name" placeholder="Product name" className="w-80" />
+        <Input
+          name="name"
+          placeholder="Product name"
+          className="w-80"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
       </div>
       <div className="flex flex-col gap-2 mt-4 text-xl font-semibold">
         <label htmlFor="">Product Intro</label>
-        <Input name="name" placeholder="Product name" className="w-80" />
+        <Input
+          name="name"
+          placeholder="Product name"
+          className="w-80"
+          value={intro}
+          onChange={(e) => setIntro(e.target.value)}
+        />
       </div>
       <div className="flex flex-col gap-2 mt-4 text-xl font-semibold">
         <label htmlFor="description">Product description</label>
         <Textarea
           placeholder="write description of product"
           className="w-[50vw]"
-        ></Textarea>
+          rows={3}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
       </div>
       <div className="mt-4 flex gap-10">
         <div className="text-xl font-semibold ">
@@ -70,7 +108,7 @@ const page = () => {
           </div>
 
           <div className="z-10">
-            <Select>
+            <Select value={gender} onValueChange={(Value) => setGender(Value)}>
               <SelectTrigger>
                 <SelectValue placeholder="Select gender" />
               </SelectTrigger>
@@ -91,7 +129,10 @@ const page = () => {
           </div>
 
           <div>
-            <Select>
+            <Select
+              value={category}
+              onValueChange={(value) => setCategory(value)}
+            >
               <SelectTrigger>
                 <SelectValue placeholder="Select Category" />
               </SelectTrigger>
@@ -111,7 +152,7 @@ const page = () => {
           </div>
 
           <div>
-            <Select>
+            <Select value={type} onValueChange={(value) => setType(value)}>
               <SelectTrigger>
                 <SelectValue placeholder="Select Type" />
               </SelectTrigger>
@@ -131,7 +172,13 @@ const page = () => {
           </div>
 
           <div>
-            <Input name="price" placeholder="$ Price" className="" />
+            <Input
+              name="price"
+              placeholder="$ Price"
+              className=""
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
           </div>
         </div>
       </div>
@@ -143,11 +190,10 @@ const page = () => {
               key={size}
               type="button"
               onClick={() => toggleSize(size)}
-              className={`px-4  py-5 border rounded-lg cursor-pointer hover:bg-blue-200 ${
-                sizes.includes(size)
+              className={`px-4  py-5 border rounded-lg cursor-pointer hover:bg-blue-200 ${sizes.includes(size)
                   ? "bg-blue-500 text-white"
                   : "bg-blue-200 text-black"
-              }`}
+                }`}
             >
               {size}
             </Button>

@@ -24,7 +24,7 @@ const Navbar = () => {
       </div>
       <div className="hidden md:flex">
         <ul className="flex items-center font-semibold lg:gap-10 md:gap-5 list-none text-nowrap">
-        <Link href="/home">  <li>Home</li></Link>
+        <Link href="/">  <li>Home</li></Link>
         <Link href="/collection">  <li>Collection</li></Link>
         <Link href="/about">  <li>About</li></Link>
         <Link href="/contact">  <li>Contact</li></Link>

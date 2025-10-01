@@ -50,6 +50,6 @@ model Product {
   description String
   image String
   gender String 
-  category String
+  category String @default("other")
   
 }
