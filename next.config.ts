@@ -5,6 +5,16 @@ const nextConfig: NextConfig = {
     serverActions:{
       bodySizeLimit: '3mb'
     }
+  },
+  images:{
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "storage.googleapis.com",
+        port: "",  
+        pathname: "/**"
+      }
+    ]
   }
 };
 

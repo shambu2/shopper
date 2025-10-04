@@ -1,12 +1,9 @@
 import { NextResponse,NextRequest } from "next/server";
 import { bucket } from "@/lib/gcp";
-// import {prisma} from "@/lib/prismaClient"
-// import { PrismaClient } from "@prisma/client";
-
-// const prisma = new PrismaClient();
-
+// import { PrismaClient } from "@/lib/generated/prisma";
 import { PrismaClient } from "@/lib/generated/prisma";
-const prisma = new PrismaClient();
+
+const prisma = new PrismaClient(); 
 
 
 export async function POST(req:NextRequest){
@@ -17,9 +14,11 @@ export async function POST(req:NextRequest){
         const reviews =  formData.get("reviews") as string ;
         const price =  parseFloat(formData.get("price") as string) 
         const intro = formData.get("intro") as string;
-        const sizes = formData.getAll("sizes").filter((val): val is string => typeof val === "string" ) ;
-        const description = formData.get("description") as string;
+        const sizes = formData.get("sizes") as string;
+        const description = formData.get("description") as string | "";
         const gender = formData.get("gender") as string;
+        const type = formData.get("type") as string;
+        const category = formData.get("category") as string;
         if(!file){
             return NextResponse.json({message: "No file uploaded"},{status:400})
 
@@ -46,9 +45,13 @@ export async function POST(req:NextRequest){
                 sizes,
                 description,
                 gender,
-                image: publicUrl
-
+                image: publicUrl,
+                type,
+                category
             }
+                
+                
+            
         })
         return NextResponse.json(product,{status:201})
 

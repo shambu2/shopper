@@ -24,13 +24,13 @@ const page = () => {
   const [category, setCategory] = useState<string>("");
   const [type, setType] = useState<string>("");
   const [price, setPrice] = useState<string>("");
-  const [sizes, setSizes] = React.useState<string[]>([]);
+  const [sizes, setSizes] = useState<string>("");
 
-  const toggleSize = (size: string) => {
-    setSizes((prev) =>
-      prev.includes(size) ? prev.filter((s) => s !== size) : [...prev, size]
-    );
-  };
+  // const toggleSize = (size: string) => {
+  //   setSizes((prev) =>
+  //     prev.includes(size) ? prev.filter((s) => s !== size) : [...prev, size]
+  //   );
+  // };
 
   const hadleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -45,10 +45,12 @@ const page = () => {
     formData.append("category", category);
     formData.append("type", type);
     formData.append("price", price);
-    sizes.forEach((s)=> formData.append("sizes[]",s))
+    // sizes.forEach((s)=> formData.append("sizes[]",s))
+    formData.append("sizes",sizes)
 
     const res =  axios.post("http://localhost:3000/api/admin", formData)
     console.log( res)
+    setImage(null),setName(""),setIntro(""),setDescription(""),setGender(""),setCategory(""),setType(""),setPrice(""),setSizes("")
   };
 
   return (
@@ -82,7 +84,7 @@ const page = () => {
       <div className="flex flex-col gap-2 mt-4 text-xl font-semibold">
         <label htmlFor="">Product Intro</label>
         <Input
-          name="name"
+          name="intro"
           placeholder="Product name"
           className="w-80"
           value={intro}
@@ -137,9 +139,9 @@ const page = () => {
                 <SelectValue placeholder="Select Category" />
               </SelectTrigger>
               <SelectContent className="bg-black">
-                <SelectItem value="men">Topware</SelectItem>
-                <SelectItem value="women">Bottomware</SelectItem>
-                <SelectItem value="kids">Other</SelectItem>
+                <SelectItem value="topware">Topwear</SelectItem>
+                <SelectItem value="bottomware">Bottomwear</SelectItem>
+                <SelectItem value="winterwear">Winterwear</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -157,9 +159,9 @@ const page = () => {
                 <SelectValue placeholder="Select Type" />
               </SelectTrigger>
               <SelectContent className="bg-black">
-                <SelectItem value="men">Best seller</SelectItem>
-                <SelectItem value="women">Latest collection</SelectItem>
-                <SelectItem value="kids">all</SelectItem>
+                <SelectItem value="bestseller">Best seller</SelectItem>
+                <SelectItem value="latest">Latest collection</SelectItem>
+                <SelectItem value="all">all</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -189,7 +191,7 @@ const page = () => {
             <Button
               key={size}
               type="button"
-              onClick={() => toggleSize(size)}
+              onClick={() => setSizes(size)}
               className={`px-4  py-5 border rounded-lg cursor-pointer hover:bg-blue-200 ${sizes.includes(size)
                   ? "bg-blue-500 text-white"
                   : "bg-blue-200 text-black"

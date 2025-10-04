@@ -45,11 +45,11 @@ model Product {
   review String? @default("0")
   price Float
   intro String
-  sizes String[]
+  sizes String? @default("all")
   type String @default("all")
-  description String
+  description String?
   image String
   gender String 
-  category String @default("other")
+  category String 
   
 }
