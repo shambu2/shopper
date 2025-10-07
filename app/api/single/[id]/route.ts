@@ -23,7 +23,7 @@ export async function GET(
     const related = await prisma.product.findMany({
         where:{
             gender: product.gender,
-
+            NOT: {id:product.id}
         },
         take:4
     })

@@ -6,6 +6,7 @@ import axios from "axios";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Footer from "@/components/Footer";
+import Link from "next/link";
 
 const sizes = ["S", "M", "L", "XL"];
 
@@ -135,7 +136,8 @@ const page = () => {
       <div className="grid grid-cols-2 w-[80vw] mx-auto  md:grid-cols-4  mt-10 gap-4">
         {related?.map((p: Product) => (
           <div key={p.id}>
-            <div>
+            <Link href={`/product/${p.id}`}>
+              <div>
               <Image
                 src={p.image}
                 alt={p.name}
@@ -148,6 +150,8 @@ const page = () => {
                 <p>$ {p.price}</p>
               </div>
             </div>
+            </Link>
+            
           </div>
         ))}
       </div>

@@ -2,6 +2,7 @@
 
 import axios from "axios";
 import Image from "next/image";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 const Collection = () => {
@@ -10,7 +11,9 @@ const Collection = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const products = await axios.get("http://localhost:3000/api/collections");
+        const products = await axios.get(
+          "http://localhost:3000/api/collections"
+        );
         setProductList(products.data);
       } catch (error) {
         console.log(error);
@@ -20,7 +23,7 @@ const Collection = () => {
   }, []);
 
   return (
-    <div >
+    <div>
       <div className="flex flex-col items-center text-center my-10 gap-4">
         <h1 className="font-bold text-5xl ">
           <span className="text-gray-500 pr-4">Latest</span>Collections{" "}
@@ -32,19 +35,22 @@ const Collection = () => {
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5  gap-4">
         {productLIst.map((product: any) => (
-          <div key={product.id} >
-            <div >
-              <Image
-                src={product.image}
-                alt={product.name}
-                className="min-w-full h-full rounded-xl mb-4"
-                width={300} height={300}
-              />
-              <div className="text-lg font-bold">
-                <p className="min-w-full overflow-">{product.name}</p>
-                <p>$  {product.price}</p>
+          <div key={product.id}>
+            <Link href={`/product/${product.id}`}>
+              <div>
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  className="min-w-full h-full rounded-xl mb-4"
+                  width={300}
+                  height={300}
+                />
+                <div className="text-lg font-bold">
+                  <p className="min-w-full overflow-">{product.name}</p>
+                  <p>$ {product.price}</p>
+                </div>
               </div>
-            </div>
+            </Link>
           </div>
         ))}
       </div>
