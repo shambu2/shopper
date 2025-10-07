@@ -11,7 +11,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <div className="h-screen pt-4 mx-auto ">
+    <div className="h-screen pt-4 mx-auto w-[90vw]  ">
       <div className="grid grid-cols-3 justify-center items-center gap-10 mt-10">
         <div className="grid justify-center items-center text-xl ">
           <RotateCcw size={50} className="mb-8 ml-22" />
