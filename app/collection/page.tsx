@@ -29,9 +29,6 @@ const page = () => {
     fetchProducts();
   },[])
   
-  console.log("hiasdf")
-  
-  console.log(productLIst)
   return (
     <div>
       <Navbar />

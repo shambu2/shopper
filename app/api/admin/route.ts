@@ -14,7 +14,7 @@ export async function POST(req:NextRequest){
         const reviews =  formData.get("reviews") as string ;
         const price =  parseFloat(formData.get("price") as string) 
         const intro = formData.get("intro") as string;
-        const sizes = formData.get("sizes") as string;
+        const sizes = formData.get("sizes") as string ;
         const description = formData.get("description") as string | "";
         const gender = formData.get("gender") as string;
         const type = formData.get("type") as string;
