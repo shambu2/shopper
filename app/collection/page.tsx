@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/select";
 import axios from "axios";
 import Image from "next/image";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 const page = () => {
@@ -70,8 +71,8 @@ const page = () => {
             </div>
           </div>
         </div>
-        <div className="col-span-4  lg:col-span-4">
-          <div className="flex w-full  justify-between ">
+        <div className="col-span-4   lg:col-span-4">
+          <div className="flex w-full pb-10  justify-between ">
             <div className="text-2xl font-bold text-nowrap">Our Collection</div>
 
             <div>
@@ -89,7 +90,7 @@ const page = () => {
               </Select>
             </div>
           </div>
-          <div>
+          {/* <div>
             {productLIst.map((product:any)=>{
               return <div key={product.id} className="flex gap-3 items-center">
                 <Image src={product.image} alt={product.name} width={200} height={200}/>
@@ -99,7 +100,28 @@ const page = () => {
                 </div>
               </div>
             })}
+          </div> */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5  gap-4">
+        {productLIst.map((product: any) => (
+          <div key={product.id}>
+            <Link href={`/product/${product.id}`}>
+              <div>
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  className="min-w-full h-full rounded-xl mb-4"
+                  width={300}
+                  height={300}
+                />
+                <div className="text-lg font-bold">
+                  <p className="min-w-full overflow-">{product.name}</p>
+                  <p>$ {product.price}</p>
+                </div>
+              </div>
+            </Link>
           </div>
+        ))}
+      </div>
         </div>
       </div>
       {/* <Footer/> */}
