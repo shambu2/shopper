@@ -10,10 +10,10 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col min-h-screen min-w-[100vw]  ">
+    <div className="flex flex-col min-h-screen w-[98vw]  ">
       <Navbar />
-      <div className="flex-1 flex flex-row">
-        <div className="bg-gray-600  w-60">
+      <div className="flex-1 flex flex-row ">
+        <div className="bg-gray-600 hidden md:block  w-60">
           <div className="text-2xl flex items-center pt-2 px-2 font-bold mb-4">Admin</div>
           <Link href={'/admin/add'}>
           <div className="flex gap-2 px-2  py-2 w-full items-center mb-2 cursor-pointer">
