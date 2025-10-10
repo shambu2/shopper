@@ -113,7 +113,9 @@ const page = () => {
       </div>
       <div className="w-[80vw] mx-auto border-gray-500 mb-10">
         <div className=" flex ">
-          <p className="border text-center font-bold text-xl py-2 px-4 ">Description </p>
+          <p className="border text-center font-bold text-xl py-2 px-4 ">
+            Description{" "}
+          </p>
           <p className="border text-center text-xl py-2 px-4">Reviews(124) </p>
         </div>
         <div className="border p-4">
@@ -124,38 +126,40 @@ const page = () => {
             showcase their products, interact with customers, and conduct
             transactions without the need for a physical presence. E-commerce
             websites have gained immense popularity due to their convenience,
-            accessibility, and the global reach they offer. <br /> E-commerce websites
-            typically display products or services along with detailed
+            accessibility, and the global reach they offer. <br /> E-commerce
+            websites typically display products or services along with detailed
             descriptions, images, prices, and any available variations (e.g.,
             sizes, colors). Each product usually has its own dedicated page with
             relevant information.
           </p>
         </div>
       </div>
-      <h1 className="text-gray-100 font-medium text-4xl text-center">Related <span className="font-bold text-gray-400 pb-10 text-4xl">Products</span></h1>
+      <h1 className="text-gray-100 font-medium text-4xl text-center">
+        Related{" "}
+        <span className="font-bold text-gray-400 pb-10 text-4xl">Products</span>
+      </h1>
       <div className="grid grid-cols-2 w-[80vw] mx-auto  md:grid-cols-4  mt-10 gap-4">
         {related?.map((p: Product) => (
           <div key={p.id}>
             <Link href={`/product/${p.id}`}>
               <div>
-              <Image
-                src={p.image}
-                alt={p.name}
-                className="min-w-full h-full rounded-xl mb-4"
-                width={300}
-                height={300}
-              />
-              <div className="text-lg font-bold">
-                <p className="min-w-full overflow-">{p.name}</p>
-                <p>$ {p.price}</p>
+                <Image
+                  src={p.image}
+                  alt={p.name}
+                  className="min-w-full h-full rounded-xl mb-4"
+                  width={300}
+                  height={300}
+                />
+                <div className="text-lg font-bold">
+                  <p className="min-w-full overflow-">{p.name}</p>
+                  <p>$ {p.price}</p>
+                </div>
               </div>
-            </div>
             </Link>
-            
           </div>
         ))}
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };
