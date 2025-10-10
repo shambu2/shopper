@@ -9,8 +9,8 @@ type cartItem = {
   price: number;
   image: string;
   quantity?: number;
-  gender: string;
-  category: string;
+//   gender: string;
+//   category: string;
 };
 
 type cartContextType = {
