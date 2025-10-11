@@ -6,6 +6,12 @@
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Docker](https://img.shields.io/badge/docker-ready-brightgreen.svg)
 
+![Alt text](./public/landingpage.png)
+![Alt text](./public/collection.png)
+![Alt text](./public/footer.png)
+
+
+
 ## 📋 Table of Contents
 
 - [Overview](#overview)
