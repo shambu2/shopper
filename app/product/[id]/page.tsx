@@ -7,6 +7,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Footer from "@/components/Footer";
 import Link from "next/link";
+// import { useCart } from "@/app/context/page";
 
 const sizes = ["S", "M", "L", "XL"];
 
@@ -23,6 +24,7 @@ const page = () => {
   const [related, setRelated] = useState<Product[]>();
   const [selected, setSelected] = useState<string | null>(null);
 
+  // const {addToCart} = useCart();
   const params: any = useParams();
 
   useEffect(() => {
