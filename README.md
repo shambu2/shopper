@@ -6,8 +6,13 @@
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Docker](https://img.shields.io/badge/docker-ready-brightgreen.svg)
 
+## Landing page
 ![Alt text](./public/landingpage.png)
+
+## Collection Page
 ![Alt text](./public/collection.png)
+
+## footer
 ![Alt text](./public/footer.png)
 
 
