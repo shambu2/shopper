@@ -7,6 +7,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Footer from "@/components/Footer";
 import Link from "next/link";
+import { useCart } from "@/app/context/page";
 // import { useCart } from "@/app/context/page";
 
 const sizes = ["S", "M", "L", "XL"];
@@ -23,7 +24,7 @@ const page = () => {
   const [products, setProducts] = useState<Product>();
   const [related, setRelated] = useState<Product[]>();
   const [selected, setSelected] = useState<string | null>(null);
-
+  const {addToCart} = useCart();
   // const {addToCart} = useCart();
   const params: any = useParams();
 
@@ -100,7 +101,17 @@ const page = () => {
             </div>
 
             {/* Add to Cart Button */}
-            <button className="w-full md:w-auto bg-white text-black py-5 px-10 rounded-md hover:bg-gray-100 transition">
+            <button
+            onClick={() => {
+  if (!products) return;
+  addToCart({
+    ...products,
+    quantity: 1,
+    sizes: selected ?? products.sizes ?? "all",
+  });
+}}
+
+             className="w-full md:w-auto bg-white text-black py-5 px-10 rounded-md hover:bg-gray-100 transition">
               ADD TO CART
             </button>
 

@@ -1,22 +1,25 @@
 "use client";
+
 import { useCart } from "../context/page";
 
-export default function CartPage() {
-  const { cartItems, addToCart, removeFromCart } = useCart();
+// import { useCart } from "../context/page";
 
-  const total = cartItems.reduce(
+export default function CartPage() {
+  const {cart,addToCart,removeFromCart,clearCart} = useCart();
+
+  const total = cart.reduce(
     (acc:any, item:any) => acc + item.price * (item.quantity || 1),
     0
   );
 
-  if (cartItems.length === 0)
+  if (cart.length === 0)
     return <p className="p-8 text-center text-gray-500">Your cart is empty.</p>;
 
   return (
     <div className="max-w-3xl mx-auto p-6">
       <h1 className="text-2xl font-semibold mb-6">Your Cart</h1>
 
-      {cartItems.map((item:any) => (
+      {cart.map((item:any) => (
         <div
           key={item.id}
           className="flex items-center justify-between border-b py-4"
@@ -38,7 +41,7 @@ export default function CartPage() {
 
           <div className="flex gap-3">
             <button
-              onClick={() => removeFromCart(item)}
+              
               className="text-red-600 text-sm"
             >
               Remove
