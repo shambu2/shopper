@@ -18,13 +18,16 @@ type Product = {
   price: number;
   image: string;
   intro: string;
+  sizes?: string[];
 };
 
 const page = () => {
   const [products, setProducts] = useState<Product>();
   const [related, setRelated] = useState<Product[]>();
   const [selected, setSelected] = useState<string | null>(null);
-  const {addToCart} = useCart();
+  const[isclicked,setIsClicked]=useState(false)
+  const { addToCart } = useCart();
+  
   // const {addToCart} = useCart();
   const params: any = useParams();
 
@@ -87,7 +90,7 @@ const page = () => {
                   <button
                     key={size}
                     onClick={() => setSelected(size)}
-                    className={`px-5 py-3 border rounded-md font-medium transition 
+                    className={`px-5 py-3 cursor-pointer border rounded-md font-medium transition 
                 ${
                   selected === size
                     ? "bg-blue-500 text-white border-blue"
@@ -102,16 +105,30 @@ const page = () => {
 
             {/* Add to Cart Button */}
             <button
-            onClick={() => {
-  if (!products) return;
-  addToCart({
-    ...products,
-    quantity: 1,
-    sizes: selected ?? products.sizes ?? "all",
-  });
-}}
+              onClick={() => {
+                setIsClicked(!isclicked);
+                if (!products) return;
 
-             className="w-full md:w-auto bg-white text-black py-5 px-10 rounded-md hover:bg-gray-100 transition">
+                // Determine the size to add
+                let sizeToAdd: string;
+                if (selected) {
+                  sizeToAdd = selected;
+                } else if (Array.isArray(products.sizes)) {
+                  sizeToAdd = products.sizes[0]; // Use first size as default
+                } else if (products.sizes) {
+                  sizeToAdd = products.sizes;
+                } else {
+                  sizeToAdd = "all";
+                }
+
+                addToCart({
+                  ...products,
+                  quantity: 1,
+                  sizes: sizeToAdd,
+                });
+              }}
+              className={isclicked?"w-full md:w-auto bg-gray-400 text-black py-5 px-10 rounded-md  cursor-pointer  ":"w-full md:w-auto bg-white text-black py-5 px-10 rounded-md cursor-pointer"}
+            >
               ADD TO CART
             </button>
 

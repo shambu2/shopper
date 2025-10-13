@@ -27,10 +27,10 @@ export function CartProvider({children}:{children:ReactNode}) {
 
   const addToCart =(item:CartItem)=>{
     setCart(prev =>{
-      const existing = prev.find(i=>i.id===item.id);
+      const existing = prev.find(i=>i.id===item.id && i.sizes === item.sizes);
       if(existing){
         return prev.map(p =>
-          p.id === item.id && p.sizes === item.sizes? {...p,quantity: p.quantity+item.quantity}:p
+          p.id === item.id && p.sizes === item.sizes? {...p,quantity: p.quantity + item.quantity}:p
         );
       }
       return[...prev,item]
