@@ -1,11 +1,64 @@
+"use client"
 import Navbar from '@/components/Navbar'
-import React from 'react'
+import axios from 'axios'
+import React, { useState } from 'react'
+// import {signIn} from "next-auth/react"
+import { useSession } from 'next-auth/react'
+import { redirect } from 'next/navigation'
+
 
 const page = () => {
+  const {data: session} = useSession()
+  if(!session){
+    redirect('/login')
+  }
+  const [form,setForm] = useState<any>({
+    fullName:'',
+    phone:'',
+    street:'',
+    city:'',
+    state:'',
+    zip:'',
+    country:'',
+    
+  })
+
+const handleChange = (e:any)=>{
+  setForm({...form,[e.target.name]:e.target.value})
+}
+
+const handleSubmit = async(e:any)=>{
+  e.preventDefault();
+  const res = await axios.post('http://localhost:3000/api/address',form)
+  if (res.status === 200){
+    alert('Address added successfully')
+  }
+}
+
   return (
     <div>
         <Navbar/>
-        <h1>Checkout</h1>
+        <div className='flex justify-center items-center'>
+        <form onSubmit={handleSubmit} className='flex flex-col gap-4 w-96'>
+          {Object.keys(form).map((key)=>(
+            <input
+            key={key}
+            name={key}
+            placeholder={key}
+            value={form[key]}
+            onChange={handleChange}
+            className='border p-2 rounded'
+            
+            />
+          ))}
+          
+          <button type='submit' className='bg-white text-black p-2 rounded'>
+            Save address
+          </button>
+          
+          
+        </form>
+        </div>
     </div>
   )
 }

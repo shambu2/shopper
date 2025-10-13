@@ -3,7 +3,7 @@
 import Navbar from "@/components/Navbar";
 import { useCart } from "../context/page";
 import Link from "next/link";
-
+import {signIn} from "next-auth/react"
 // import { useCart } from "../context/page";
 
 export default function CartPage() {
@@ -67,7 +67,11 @@ export default function CartPage() {
           <button className="mt-6 w-full cursor-pointer bg-white text-black py-3 rounded-md">
             Checkout
           </button>
+
         </Link>
+        <button  className='bg-white text-black p-2 rounded'>
+            Sign in  
+            </button>
       </div>
     </div>
   );

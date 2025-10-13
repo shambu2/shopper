@@ -19,9 +19,10 @@ model User {
   id          Int @id @default(autoincrement())
   googleId    String @unique
   email       String @unique
-  name        String
+  name        String?
   createdAt   DateTime @default(now())
   orders Order[]
+  
 
 }
 
@@ -31,13 +32,10 @@ model Order {
   user User @relation(fields: [userId],references: [id])
   status String
   total Float
+  address Address @relation(fields: [addressId],references: [id])
+  addressId String @unique
 }
 
-// enum Gender {
-//   Men
-//   women
-//   Kids
-// }
 
 model Product {
   id String @id @default(uuid())
@@ -52,4 +50,17 @@ model Product {
   gender String 
   category String 
   
+}
+
+model Address {
+  id String  @id @default(cuid())
+  fullName String
+  phone String
+  street String
+  city String
+  state String
+  zip String
+  country String
+  createdAt DateTime @default(now())
+  order Order?
 }
