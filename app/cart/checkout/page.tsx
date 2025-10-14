@@ -5,13 +5,11 @@ import React, { useState } from 'react'
 // import {signIn} from "next-auth/react"
 import { useSession } from 'next-auth/react'
 import { redirect } from 'next/navigation'
+import { useCart } from '@/app/context/page'
 
 
 const page = () => {
-  // const {data: session} = useSession()
-  // if(!session){
-  //   redirect('/login')
-  // }
+  const {cart} = useCart()
   const [form,setForm] = useState<any>({
     
     fullName:'',
@@ -30,9 +28,10 @@ const handleChange = (e:any)=>{
 
 const handleSubmit = async(e:any)=>{
   e.preventDefault();
-  const res = await axios.post('http://localhost:3000/api/address',form)
+  const res = await axios.post('http://localhost:3000/api/placeorder',{form,cart})
   if (res.status === 200){
-    alert('Address added successfully')
+    // alert('Address added successfully')
+    return <div>Address added successfully</div>
   }
 }
 
