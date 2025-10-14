@@ -5,10 +5,16 @@ import { useCart } from "../context/page";
 import Link from "next/link";
 import {signIn} from "next-auth/react"
 // import { useCart } from "../context/page";
+import { useSession } from "next-auth/react";
+import { redirect, useRouter } from "next/navigation";
+
 
 export default function CartPage() {
+  const router = useRouter()
   const { cart, removeFromCart } = useCart();
 
+  const {data: session,status} = useSession();
+  
   const total = cart.reduce(
     (acc: any, item: any) => acc + item.price * (item.quantity || 1),
     0
@@ -21,6 +27,15 @@ export default function CartPage() {
         <p className="p-8 text-center text-gray-500">Your cart is empty.</p>;
       </div>
     );
+  
+
+  const handleCheckout = ()=>{
+    if(status === 'authenticated' || session){
+      router.push('/cart/checkout')
+    }else{
+      router.push('/login?redirect=/cart/ss')
+    }
+  }
 
   return (
     <div>
@@ -63,15 +78,13 @@ export default function CartPage() {
           <span>Total:</span>
           <span>$ {total}</span>
         </div>
-        <Link href={'/cart/checkout'}>
-          <button className="mt-6 w-full cursor-pointer bg-white text-black py-3 rounded-md">
+        {/* <Link href={'/cart/checkout'}> */}
+          <button onClick={handleCheckout} className="mt-6 w-full cursor-pointer bg-white text-black py-3 rounded-md">
             Checkout
           </button>
 
-        </Link>
-        <button  className='bg-white text-black p-2 rounded'>
-            Sign in  
-            </button>
+        {/* </Link> */}
+        
       </div>
     </div>
   );

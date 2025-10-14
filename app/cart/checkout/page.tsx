@@ -8,11 +8,12 @@ import { redirect } from 'next/navigation'
 
 
 const page = () => {
-  const {data: session} = useSession()
-  if(!session){
-    redirect('/login')
-  }
+  // const {data: session} = useSession()
+  // if(!session){
+  //   redirect('/login')
+  // }
   const [form,setForm] = useState<any>({
+    
     fullName:'',
     phone:'',
     street:'',
