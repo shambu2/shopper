@@ -1,13 +1,12 @@
 "use client";
-import Navbar from "@/components/Navbar";
+
 import axios from "axios";
 import { X } from "lucide-react";
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 const page = () => {
   const [productList, setProductList] = useState<any>([]);
-  const router = useRouter();
+  // const router = useRouter();
   useEffect(() => {
     const fetchProduct = async () => {
       const res = await axios.get("http://localhost:3000/api/products/items");

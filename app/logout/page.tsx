@@ -1,12 +1,8 @@
 "use client"
 import { signOut,useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
 
 const page = () => {
-    const {data: session } = useSession();
-    // if(!session){
-    //     redirect('/')
-    // }
+    
   return (
      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
           <div className="bg-white shadow-md px-8 py-4 flex justify-center items-center rounded-2xl text-center">

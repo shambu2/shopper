@@ -2,10 +2,7 @@
 import Navbar from '@/components/Navbar'
 import axios from 'axios'
 import React, { useState } from 'react'
-// import {signIn} from "next-auth/react"
-import { useSession } from 'next-auth/react'
-import { redirect } from 'next/navigation'
-import { useCart } from '@/app/context/page'
+import { useCart } from '@/lib/CartProvider'
 
 
 const page = () => {
@@ -30,8 +27,7 @@ const handleSubmit = async(e:any)=>{
   e.preventDefault();
   const res = await axios.post('http://localhost:3000/api/placeorder',{form,cart})
   if (res.status === 200){
-    // alert('Address added successfully')
-    return <div>Address added successfully</div>
+    alert('Address added successfully')
   }
 }
 

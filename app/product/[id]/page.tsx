@@ -7,7 +7,8 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Footer from "@/components/Footer";
 import Link from "next/link";
-import { useCart } from "@/app/context/page";
+// import { useCart } from "@/app/context/page";
+import { useCart } from "@/lib/CartProvider";
 // import { useCart } from "@/app/context/page";
 
 const sizes = ["S", "M", "L", "XL"];

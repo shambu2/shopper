@@ -3,17 +3,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
-import { useContext } from "react";
-import { useCart } from "@/app/context/page";
-import { connect } from "http2";
 
 const prisma = new PrismaClient();
 
 export async function POST(req: NextRequest) {
-  // this should be server component
-  // const { cart } = useCart();
   const data = await req.json(); 
-    const { form, cart } = data; // <-- read both
+    const { form, cart } = data; 
 
     const { fullName, phone, street, city, state, zip, country } = form;
 
@@ -24,26 +19,6 @@ export async function POST(req: NextRequest) {
   }
 
   const userId = session.user.id;
-
-  // const formData = await req.formData();
-  // const fullName = formData.get("fullName") as string;
-  // const phone = formData.get("phone") as string;
-  // const street = formData.get("street") as string;
-  // const city = formData.get("city") as string;
-  // const state = formData.get("state") as string;
-  // const zip = formData.get("zip") as string;
-  // const country = formData.get("country") as string;
-
-  // const address = {
-  //   fullName,
-  //   phone,
-  //   street,
-  //   city,
-  //   state,
-  //   zip,
-  //   country,
-  // };
-  
 
   try {
     const user = await prisma.user.findUnique({

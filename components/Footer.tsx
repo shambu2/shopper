@@ -1,13 +1,8 @@
-import { IconExchange } from "@tabler/icons-react";
-import Image from "next/image";
-import logoIcon from "@/public/assets/logo.png";
+
 import React from "react";
-// import exchangeIcon from "@/public/assets/exchange_icon.png"
-import qualityIcon from "@/public/assets/quality_icon.png";
-import contactIcon from "@/public/assets/support_img.png";
 import { MessagesSquare, RotateCcw, ShieldCheck } from "lucide-react";
 import { Button } from "./ui/button";
-import Link from "next/link";
+
 
 const Footer = () => {
   return (

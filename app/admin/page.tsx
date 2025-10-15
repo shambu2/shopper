@@ -1,9 +1,9 @@
 import React from 'react'
 
-const page = ({children}:{children:React.ReactNode}) => {
+const page = () => {
   return (
     <div>
-      {children}
+      navigate to check 
     </div>
   )
 }

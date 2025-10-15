@@ -3,7 +3,7 @@
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 const Collection = () => {
   const [productLIst, setProductList] = React.useState<any>([]);

@@ -1,12 +1,9 @@
 "use client";
 
 import Navbar from "@/components/Navbar";
-import { useCart } from "../context/page";
-import Link from "next/link";
-import {signIn} from "next-auth/react"
-// import { useCart } from "../context/page";
+import { useCart } from "@/lib/CartProvider";
 import { useSession } from "next-auth/react";
-import { redirect, useRouter } from "next/navigation";
+import {  useRouter } from "next/navigation";
 
 
 export default function CartPage() {
